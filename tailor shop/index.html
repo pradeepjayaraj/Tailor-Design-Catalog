@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailor Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1>Tailor Studio</h1>
+        <p>Handcrafted blouses tailored to your story.</p>
+        <nav class="menu">
+          <button class="menu__btn" data-category="all">All</button>
+          <button class="menu__btn" data-category="normal">Normal Blouse</button>
+          <button class="menu__btn" data-category="design">Design Blouse</button>
+          <button class="menu__btn" data-category="embroidering">Embroidering</button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="catalog">
+        <div class="catalog__header">
+          <h2>Featured Collections</h2>
+          <div class="catalog__count">
+            <span id="total-count">0 designs</span>
+            <span id="total-value">₹0 total value</span>
+          </div>
+        </div>
+        <div class="catalog__grid" id="catalog-grid"></div>
+      </section>
+
+      <section class="admin-panel" id="admin-panel">
+        <div class="admin-panel__access">
+          <h3>Admin Access</h3>
+          <div class="admin-panel__login" id="login-form">
+            <input type="password" id="admin-password" placeholder="Enter password" />
+            <button id="login-btn">Unlock</button>
+            <small>Hint: ask the owner.</small>
+          </div>
+          <div class="admin-panel__badge hidden" id="admin-badge">
+            <span>Admin Mode</span>
+            <button id="logout-btn">Lock</button>
+          </div>
+        </div>
+
+        <form class="admin-form hidden" id="design-form">
+          <h4>Add or Update Design</h4>
+          <div class="form__group">
+            <label for="design-name">Design name</label>
+            <input id="design-name" type="text" required />
+          </div>
+          <div class="form__group">
+            <label for="design-category">Category</label>
+            <select id="design-category" required>
+              <option value="">Select category</option>
+              <option value="normal">Normal</option>
+              <option value="design">Design</option>
+              <option value="embroidering">Embroidering</option>
+            </select>
+          </div>
+          <div class="form__group">
+            <label for="design-price">Price (₹)</label>
+            <input id="design-price" type="number" min="0" required />
+          </div>
+          <div class="form__group">
+            <label for="design-images">Image URLs</label>
+            <textarea
+              id="design-images"
+              rows="2"
+              placeholder="Images/design/look1.jpg, Images/design/look2.jpg"
+              required
+            ></textarea>
+            <small class="form__hint">Paste multiple links separated by commas. First image becomes the cover.</small>
+          </div>
+          <div class="form__group">
+            <label for="design-notes">Notes</label>
+            <textarea id="design-notes" rows="2" placeholder="Describe the finish, fabric, etc."></textarea>
+          </div>
+          <div class="form__actions">
+            <button type="submit">Save design</button>
+            <button type="reset">Reset</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <div class="modal hidden" id="image-modal">
+      <div class="modal__content">
+        <button class="modal__close" id="modal-close">×</button>
+        <div class="modal__viewer">
+          <button class="modal__nav" id="modal-prev" aria-label="Previous image">‹</button>
+          <img id="modal-image" alt="Full view" />
+          <button class="modal__nav" id="modal-next" aria-label="Next image">›</button>
+        </div>
+        <p id="modal-title"></p>
+        <div class="modal__thumbs hidden" id="modal-thumbs"></div>
+      </div>
+    </div>
+
+    <template id="card-template">
+      <article class="card">
+        <div class="card__media">
+          <img />
+          <button class="card__zoom">View full</button>
+        </div>
+        <div class="card__thumbs hidden"></div>
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="card__category"></span>
+          </div>
+          <h3 class="card__title"></h3>
+          <p class="card__notes"></p>
+          <div class="card__footer">
+            <span class="card__price"></span>
+            <button class="card__remove hidden">Remove</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
